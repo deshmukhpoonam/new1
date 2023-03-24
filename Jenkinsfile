@@ -1,23 +1,21 @@
 
-pipeline{
+## index.html deploy on docker container without volume
+pipeline {
   agent {
-    label {
-	
-	   label "built-in"
-	   customWorkspace "/mnt/docker"
-	      }
-      }
-	stages {
-	 stage ("deploy-on-docker-container-wiout-vol"){
-	    steps {
-		   sh "systemctl start docker"
-		   sh "docker pull ubuntu:18.04"
-                   sh "docker run -itdp 81:80 --name newserver ubuntu:18.04"
-		   sh "cp -r /mnt/docker/index.html  /mnt/docker/newserver:/tmp" 
-           		   
-		    }
-		}
-	 
-	 }
-	 
-   }
+   label {
+      label "built-in"
+	  customWorkspace "/mnt/newhttpd"
+        }
+	}
+
+ stages {
+  stage ("deploy-on-doc-con"){
+    steps {
+	 sh "docker run ubuntu 18.04 -itdp 82:80 --name con-1 "
+	 sh "cp -r /mnt/newhttpd/index.html /user/local/apache2/htdocs"
+	}
+  
+  }
+}
+
+}
