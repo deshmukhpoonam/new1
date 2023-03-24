@@ -13,7 +13,7 @@ pipeline{
 		   sh "systemctl start docker"
 		   sh "docker pull ubuntu:18.04"
                    sh "docker run -itdp 80:80 --name server ubuntu:18.04"
-		   sh "cp -r /mnt/docker/index.html  mnt/docker/server:/tmp" 
+		   sh "cp -r /mnt/docker/index.html  /mnt/docker/servernew1:/tmp" 
            		   
 		    }
 		}
