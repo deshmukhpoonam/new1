@@ -1,23 +1,18 @@
-
-
 pipeline {
-  agent {
-   label {
-      label "built-in"
-	  customWorkspace "/mnt/newhttpd"
-        }
-	}
-
+    agent {
+	  label {
+	      label "built-in"
+		  customWorkspace "/mnt/data"
+	       }
+	    }
  stages {
-  stage ("deploy-on-doc-con"){
-    steps {
-	 sh "systemctl start docker"
-	 sh "docker run -itdp 87:80 --name con-17 httpd"
-	 sh "cp /mnt/newhttpd/index.html con-17:/usr/local/apache2/htdocs"
-	 sh "chmod -R 777 /mnt/newhttpd/index.html"
-	}
+  stage ("deploy-on-con-vol"){
+     steps {
+	   sh "docker create vol vol1"
+	   sh "cp /mnt/data/index.html /var/lib/docker/volumes/vol1/_data"
+	   sh "docker run -itdp 88:88 -v index.html:/usr/local/apache2/httpd"
+	       }
   
-  }
-}
-
+        }
+    }
 }
