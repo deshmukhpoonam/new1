@@ -12,7 +12,10 @@ pipeline{
 			    steps {
 				  sh "service httpd restart"
 				  sh "cp -r /mnt/project/index.html  /var/www/html"
-				  sh "chmod -R 777 /mnt"
+				  sh "chmod -R 777 /var/www/html/index.html"
+				    
+				    
+				
 				      }
 			    }
 			}
