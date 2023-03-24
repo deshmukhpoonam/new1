@@ -10,7 +10,7 @@ pipeline {
      steps {
 	   sh "docker create vol vol1"
 	   sh "cp /mnt/data/index.html /var/lib/docker/volumes/vol1/_data"
-	   sh "docker run -itdp 88:88 -v index.html:/usr/local/apache2/httpd"
+	   sh "docker run -itdp 89:80 -v index.html:/usr/local/apache2/htdocs --name httpd httpd"
 	       }
   
         }
