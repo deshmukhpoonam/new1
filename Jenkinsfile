@@ -11,6 +11,7 @@ pipeline {
  stages {
   stage ("deploy-on-doc-con"){
     steps {
+	 sh "systemctl start docker"
 	 sh "docker run ubuntu 18.04 -itdp 82:80 --name con-1 bash"
 	 sh "cp -r /mnt/newhttpd/index.html /user/local/apache2/htdocs"
 	}
