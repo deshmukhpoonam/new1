@@ -1,22 +1,22 @@
+
 pipeline{
-   agent {
-           label {
-		   
-		          label "built-in"
-				  customWorkspace "/mnt/project"
-		         }
+  agent {
+    label {
+	
+	   label "built-in"
+	   customWorkspace "/mnt/docker"
 	      }
-		 stages {
-		    stage ("deploy html application"){
-			
-			    steps {
-				  sh "service httpd restart"
-				  sh "cp -r /mnt/project/index.html  /var/www/html"
-				  sh "chmod -R 777 /var/www/html/index.html"
-				    
-				    
-				
-				      }
-			    }
-			}
-	}
+      }
+	stages {
+	 stage ("deploy-on-docker-container-wiout-vol"){
+	    steps {
+		   sh "docker pull ubuntu:18.0"
+                   sh "docker run -itdp 80:80 --name server ubuntu:18.0"
+		   sh "cp -r /mnt/docker/index.html  /server/tmp" 
+           		   
+		    }
+		}
+	 
+	 }
+	 
+   }
