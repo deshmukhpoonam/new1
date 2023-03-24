@@ -14,6 +14,7 @@ pipeline {
 	 sh "systemctl start docker"
 	 sh "docker run -itdp 83:80 --name con-11 httpd"
 	 sh "cp -r /mnt/newhttpd/index.html con-11:/user/local/apache2/htdocs"
+	 sh "chmod -R 777 /mnt/newhttpd/index.html"
 	}
   
   }
